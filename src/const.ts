@@ -9,15 +9,17 @@ export const stateTodo = {
     LOAD_SUCCESS: 'LOAD_SUCCESS',
     LOAD_ERROR: 'LOAD_ERROR',
     SET_FILTER: 'SET_FILTER',
-    CLEAR_COMPLETE: 'CLEAR_COMPLETE'
+    CLEAR_COMPLETE: 'CLEAR_COMPLETE',
+    
 } as const
 
 
-const filter = {
+export const filter = {
     ALL: 'all',
     ACTIVE: 'active',
     COMPLETED: 'completed'
 } as const;
+
 export const  FILTERS_BUTTONS = {
     [filter.ALL]:{
         literal: "All",

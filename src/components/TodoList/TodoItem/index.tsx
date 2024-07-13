@@ -29,13 +29,13 @@ export const Item: React.FC<ItemProps> = ({todo}) => {
     }
     const {attributes, listeners, setNodeRef, transform, transition, } = useSortable({
         id: id
-    })
+    })//animate-fade-in
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
     }
     return (
-        <li style={style} {...attributes}  ref={setNodeRef} className={`h-[44px] flex items-center content-center p-4 border-b-[1px] ${themeBorderClasses} transition-colors duration-500 ease-in-out   rounded-lg rounded-b-none hover:${theme === 'dark' ? 'rounded-lg rounded-b-none inputDark' : ' rounded-lg rounded-b-none inputLight'} ${fade? 'animate-fade-out' : 'animate-fade-in'}`}>
+        <li style={style} {...attributes}  ref={setNodeRef} className={`h-[44px] flex items-center content-center p-4 border-b-[1px] ${themeBorderClasses} transition-colors duration-500 ease-in-out   rounded-lg rounded-b-none hover:${theme === 'dark' ? 'rounded-lg rounded-b-none inputDark' : ' rounded-lg rounded-b-none inputLight'} ${fade? 'animate-fade-out' : ''}`}>
 
             <button className={`w-8 h-8 border-2 rounded-full delay-75  ${background} hover:scale-150 ${completed? 'border-green-500': '${themeBorderClasses}'} animate-fade-in`} onClick={()=>handleCheck()}>
                 {completed? (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className={`size-7 scale-75 ${completed? 'text-green-500': ''}`}>

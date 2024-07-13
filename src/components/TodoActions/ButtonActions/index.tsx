@@ -1,6 +1,7 @@
 import React from 'react'
 import { appContext } from '../../../Hooks/Context/appContext'
 import { FILTERS_BUTTONS } from '../../../const';
+import { FilterValue } from '../../../types/type';
 export const ButtonActions: React.FC = () => {
     const {actions, filter: statusTodo} = React.useContext(appContext);
 
@@ -13,7 +14,7 @@ export const ButtonActions: React.FC = () => {
                         : 'initial'} cursor-pointer`}>
                         <a href={href} className='transition-transform duration-300 ease-in-out transform hover:scale-150' onClick={event => {
                             event.preventDefault();
-                            actions.setFilter(literal.toLowerCase());
+                            actions.setFilter(literal.toLowerCase() as FilterValue);
                         } }
                         >{literal}
                         </a>

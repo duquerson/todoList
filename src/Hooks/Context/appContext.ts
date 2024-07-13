@@ -11,10 +11,10 @@ export const appContext = createContext<AppContextType>({
     todos: [],
     load: false,
     error: false,
-    filter: '',
+    filter: 'all',
     totalItems: 0,
     actions: {
-        agregarTodo: () => { },
+        agregarTodo: async() => { },
         eliminarTodo: () => { },
         completarTodo: () => { },
         handleDragEnd: () => { },

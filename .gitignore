@@ -108,7 +108,7 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
-
+/src/.env
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
@@ -189,3 +189,5 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node,dotenv,visualstudiocode
 SquareX Safe File Viewer
 ✕
+
+/src/secret.ts

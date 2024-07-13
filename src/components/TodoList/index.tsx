@@ -8,7 +8,7 @@ export const TodoList: React.FC = () => {
     const {theme, todos, error, load, actions} = React.useContext(appContext);
 
     return (
-        <ul className={`max-w-[550px] mx-auto md:mt-5 mt-5 container rounded-lg rounded-b-none transition-colors duration-500 ease-in-out shadow-2xl ${theme === 'dark' ? ' inputDark' : ' inputLight'} `}>
+        <ul className={`max-w-[550px] mx-auto md:mt-5 mt-5 container rounded-lg rounded-b-none transition-colors duration-500 ease-in-out shadow-2xl  ${theme === 'dark' ? ' inputDark' : ' inputLight'} `}>
             <DndContext collisionDetection={closestCenter} onDragEnd={actions.handleDragEnd} >
                 <SortableContext items={todos} strategy={verticalListSortingStrategy}>
                     {load ? (
