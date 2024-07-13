@@ -15,8 +15,8 @@ export const appContext = createContext<AppContextType>({
     totalItems: 0,
     actions: {
         agregarTodo: async() => { },
-        eliminarTodo: () => { },
-        completarTodo: () => { },
+        eliminarTodo: async() => { },
+        completarTodo: async() => { },
         handleDragEnd: () => { },
         cargarTodos: () => { },
         cargarTodosSuccess: () => { },
