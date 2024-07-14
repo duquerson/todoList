@@ -1,11 +1,11 @@
 //import { testTodo } from "../Mooks"
-import React, { useReducer } from "react";
-import { todos,State_Todos, AccionHandler,Action_Todos, FilterValue} from "../types/type";
-import {stateTodo} from '../const'
-import { arrayMove } from "@dnd-kit/sortable";
 import { DragEndEvent } from "@dnd-kit/core";
-import {setFilter} from './setFilter';
-import { fetchTodos, updateTodos } from "../services/todoService";
+import { arrayMove } from "@dnd-kit/sortable";
+import React, { useReducer } from "react";
+import { stateTodo } from '../const';
+import { fetchSchemaDoc, updateSchemaDoc } from "../services/JSONbinService";
+import { AccionHandler, Action_Todos, FilterValue, State_Todos, todos } from "../types/type";
+import { setFilter } from './setFilter';
 
 
 //}
@@ -134,7 +134,7 @@ export const useTodoReducer = () => {
         dispatch({ type: 'LOAD' });
         const loadTodos = async () => {
             try {
-                const todosFromApi = await fetchTodos();
+                const todosFromApi = await fetchSchemaDoc();
                 dispatch({ type: 'LOAD_SUCCESS', payload: todosFromApi });
             } catch (error) {
                 dispatch({ type: 'LOAD_ERROR' });
@@ -148,19 +148,19 @@ export const useTodoReducer = () => {
     const agregarTodo = async(description: string) => {
         const newTodo = { id: crypto.randomUUID(), description, completed: false };
         dispatch({ type: stateTodo.ADD, payload: newTodo });
-        await updateTodos([...todos.todos, newTodo]);
+        await updateSchemaDoc([...todos.todos, newTodo]);
     }
     const eliminarTodo = async (id: string) =>{
         dispatch({ type: stateTodo.DELETE, payload: id });
-        await updateTodos(todos.todos.filter(todo => todo.id !== id));
+        await updateSchemaDoc(todos.todos.filter(todo => todo.id !== id));
     }
     const completarTodo = async (id: string) =>{
         dispatch({ type: stateTodo.COMPLETE, payload: id });
-        await updateTodos(todos.todos.map(todo => todo.id === id ? { ...todo, completed: !todo.completed } : todo));
+        await updateSchemaDoc(todos.todos.map(todo => todo.id === id ? { ...todo, completed: !todo.completed } : todo));
     }
     const clearComplete = async () =>{
         dispatch({ type: stateTodo.CLEAR_COMPLETE });
-        await updateTodos(todos.todos.filter(todo => !todo.completed));
+        await updateSchemaDoc(todos.todos.filter(todo => !todo.completed));
     }
     const setFilter = (filter: FilterValue) =>{
         dispatch({ type: stateTodo.SET_FILTER, payload: {filter} });
