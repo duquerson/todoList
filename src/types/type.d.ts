@@ -24,14 +24,13 @@ export interface UseTodoReducerResult {
         cargarTodos: () => void;
         cargarTodosSuccess: (payload: todos) => void;
         cargarTodosError: () => void;
-		setFilter: (filter: FilterValue) => void;
+		todosFilter: (filter: FilterValue) => void;
 		clearComplete: () => void;
     };
 
 }
 
-import { filter } from "../const";
-import { stateTodo } from "../const";//definicion const de Accion
+import { filter, stateTodo } from "../const";
 export interface State_Todos {
 	todos: todos,
 	load: boolean,
@@ -75,4 +74,13 @@ export interface typefilterHandlers{
 }
 
 export type FilterValue = typeof filter[keyof typeof filter]
+
+export interface TodoRepositoryCloud {
+	fetchTodosFromCloud(): Promise<todos>;
+	updateSupabase(todos: todos): Promise<void>;
+	addSupabase(todo: todo): Promise<void>;
+	deleteSupabase(id: string): Promise<void>;
+	clearCompletedSupabase(): Promise<void>;
+}
+
 
