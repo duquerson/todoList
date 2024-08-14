@@ -3,12 +3,12 @@ import { arrayMove } from "@dnd-kit/sortable";
 import { stateTodo } from "../../../const";
 import { Action_Todos, FilterValue, TodoRepositoryCloud, todos } from "../../../types/type";
 import '../utils/polyfill_crypto.js';
+
 export const loadTodos = async (dispatch: React.Dispatch<Action_Todos>, todoRepository: TodoRepositoryCloud): Promise<todos> => {
     const todosFrom = await todoRepository.fetchTodosFromCloud();
     dispatch({ type: stateTodo.LOAD_SUCCESS, payload: todosFrom });
     return todosFrom;
 };
-
 
 
 export const agregarTodo = async (description: string, todoRepository: TodoRepositoryCloud, dispatch: React.Dispatch<Action_Todos>) => {
