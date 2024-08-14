@@ -1,8 +1,10 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
+import csurf from 'csurf';
 import express, { Request, Response } from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import { supabase } from '../src/services/conectDB';
+const csrfProtection = csurf({ cookie: true });
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100,
@@ -23,6 +25,7 @@ app.use(helmet({
     referrerPolicy: { policy: 'no-referrer' },
 }));
 app.use(limiter);
+app.use(csrfProtection);
 
 // CRUD endpoints
 app.get('/api/todos', async (req: Request, res: Response)=>{
@@ -38,7 +41,7 @@ app.get('/api/todos', async (req: Request, res: Response)=>{
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
-app.post('/api/todos', async (req: Request, res: Response)=>{
+app.post('/api/todos',csrfProtection, async (req: Request, res: Response)=>{
     try {
         const newTodo = req.body;
         const { error } = await supabase.from('TODOS').insert(newTodo);
@@ -51,7 +54,7 @@ app.post('/api/todos', async (req: Request, res: Response)=>{
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
-app.put('/api/todos', async(req: Request, res: Response)=>{
+app.put('/api/todos', csrfProtection,async(req: Request, res: Response)=>{
     const todos = req.body;
     try {
         const { error } = await supabase.from('TODOS').upsert(todos);
@@ -65,7 +68,7 @@ app.put('/api/todos', async(req: Request, res: Response)=>{
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
-app.delete('/api/todos/:id?', async (req: Request, res: Response) => {
+app.delete('/api/todos/:id?', csrfProtection, async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         let query = supabase.from('TODOS').delete();

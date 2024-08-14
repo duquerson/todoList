@@ -37,8 +37,10 @@ export const useTodoReducer = (todoRepository : TodoRepositoryCloud) => {
         const loadTodos = async () => {
             try {
                 const todosFrom = await actions.loadTodos(dispatch, todoRepository);
+                console.log(todosFrom)
                 dispatch({ type: stateTodo.LOAD_SUCCESS, payload: todosFrom });
             } catch (error) {
+
                 dispatch({ type: stateTodo.LOAD_ERROR });
                 console.error("Error loading todos:", error);
             }
