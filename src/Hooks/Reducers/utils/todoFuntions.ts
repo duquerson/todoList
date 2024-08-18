@@ -5,9 +5,10 @@ import { Action_Todos, FilterValue, TodoRepositoryCloud, todos } from "../../../
 import '../utils/polyfill_crypto.js';
 
 export const loadTodos = async (dispatch: React.Dispatch<Action_Todos>, todoRepository: TodoRepositoryCloud): Promise<todos> => {
-    const todosFrom = await todoRepository.fetchTodosFromCloud();
-    dispatch({ type: stateTodo.LOAD_SUCCESS, payload: todosFrom });
-    return todosFrom;
+    const todos = await todoRepository.fetchTodos();
+
+    dispatch({ type: stateTodo.LOAD_SUCCESS, payload: todos });
+    return todos;
 };
 
 

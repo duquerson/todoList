@@ -1,22 +1,15 @@
 import { todo, TodoRepositoryCloud, todos } from "../types/type";
 
 export class CloudStorageRepository implements TodoRepositoryCloud {
-    async fetchTodosFromCloud(): Promise<todos> {
+    async fetchTodos(): Promise<todos> {
         try {
-            const response = await fetch(`/api/todos`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
+            const response = await fetch(`/api`);
             if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Error fetching todos: ${response.statusText} - ${errorText}`);
+                throw new Error('Network response was not ok');
             }
 
-            const TODOS = await response.json();
-            return TODOS;
+            const todos = await response.json();
+            return todos;
         } catch (error) {
             console.error('Error fetching todos:', error);
             throw error;
@@ -25,7 +18,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
     async updateSupabase(todos: todos): Promise<void> {
         try {
-            const response = await fetch(`/api/todos`, {
+            const response = await fetch(`/api`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +39,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
     async addSupabase(todo: todo): Promise<void> {
         try {
-            const response = await fetch(`/api/todos`, {
+            const response = await fetch(`/api`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +60,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
     async deleteSupabase(id: string): Promise<void> {
         try {
-            const response = await fetch(`/api/todos/${id}`, {
+            const response = await fetch(`/api/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,7 +80,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
     async clearCompletedSupabase(): Promise<void> {
         try {
-            const response = await fetch(`/api/todos`, {
+            const response = await fetch(`/api`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
