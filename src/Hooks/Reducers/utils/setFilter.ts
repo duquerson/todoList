@@ -1,5 +1,5 @@
-import { FilterValue } from "../types/type";
-import { filter } from "../const";
+import { filter } from "../../../const";
+import { FilterValue } from "../../../types/type";
 export const setFilter = () => {
     //read the url
     const params = new URLSearchParams(window.location.search);

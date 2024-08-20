@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { themeDefault } from "../utils/Theme";
-import { themeType } from "../types/type";
+import { useEffect, useState } from "react";
+import { themeType } from "../../types/type";
+import { themeDefault } from "./utils/Theme";
 export const Theme = ():themeType => {
     const [theme, setTheme] = useState<string>(
         localStorage.getItem("themeTodo") ?? themeDefault()

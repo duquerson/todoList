@@ -1,4 +1,4 @@
-import { createContext} from "react";
+import { createContext } from "react";
 import { themeType, UseTodoReducerResult } from "../../types/type";
 
 
@@ -21,7 +21,7 @@ export const appContext = createContext<AppContextType>({
         cargarTodos: () => { },
         cargarTodosSuccess: () => { },
         cargarTodosError: () => { },
-        setFilter: ()=> {},
+        todosFilter: ()=> {},
         clearComplete: ()=> {}
     }
 });

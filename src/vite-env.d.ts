@@ -1,9 +1,9 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-	readonly VITE_VERCEL_ENV_URL: string;
-	readonly VITE_VERCEL_ENV_MASTER: string;
-	readonly VITE_VERCEL_ENV_ACCESS: string;
+	readonly VITE_URL: string;
+	readonly VITE_ANON_KEY: string;
+	readonly VITE_SERVICE_ROL: string;
 }
 
 interface ImportMeta {
