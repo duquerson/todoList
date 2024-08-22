@@ -7,7 +7,7 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import path from "path";
 import api from "./api/index.js";
-const whitelist = ["todo-list-rho-eight-93.vercel.app"];
+const whitelist = ["todo-list-git-main-duquersons-projects.vercel.app"];
 const corsOptions = {
 	origin: (origin, callback) => {
 		if (whitelist.indexOf(origin) !== -1 || !origin) {
