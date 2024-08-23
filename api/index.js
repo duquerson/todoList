@@ -1,51 +1,40 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable indent */
+/* eslint-disable no-undef */
 import express from "express";
-import { supabase as DB } from "../services/conectDB.js";
-
-const router = express.Router();
-
-router.get("/", async (req, res) => {
-	const { data, error } = await DB.from("TODOS").select("*");
-	if (error) return res.status(500).json({ error: error.message });
-	return res.status(200).json(data);
-});
-
-router.post("/", async (req, res) => {
-	const item = req.body;
-	const { data, error } = await DB.from("TODOS").insert(item);
-	if (error) return res.status(500).json({ error: error.message });
-	return res.status(201).json(data);
-});
-
-router.put("/", async (req, res) => {
-	const todos = req.body;
-	try {
-		const { error } = await DB.from("TODOS").upsert(todos);
-
-		if (error) return res.status(500).json({ error: error.message });
-	} catch (error) {
-		console.error("Error en PUT:", error);
-		res.status(500).json({ error: "Error interno del servidor" });
-	}
-});
-
-router.delete("/:id?", async (req, res) => {
-	try {
-		const { id } = req.params;
-		let query = DB.from("TODOS").delete();
-
-		if (id) {
-			query = query.eq("id", id);
+import helmet from "helmet";
+import api from "./index.js";
+//const whitelist = ["todo-list-git-main-duquersons-projects.vercel.app"];
+/*const corsOptions = {
+	origin: (origin, callback) => {
+		if (whitelist.indexOf(origin) !== -1 || !origin) {
+			callback(null, true);
 		} else {
-			query = query.eq("completed", true);
+			callback(new Error("Not allowed by CORS"));
 		}
-		const { error } = await query;
-		if (error) {
-			throw new Error(error.message);
-		}
-		res.status(200).send("Todo(s) deleted successfully");
-	} catch (err) {
-		res.status(500).json({ error: err.message });
-	}
+	},
+	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+};*/
+
+const app = express();
+app.disable("x-powered-by");
+//app.use(cors(corsOptions));
+app.use(helmet());
+app.use();
+app.use(express.json());
+app.use("/api", api);
+
+// Manejo de errores
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).send("Algo salió mal!");
 });
-export default router;
+app.get("/", (req, res) => res.send("Express on Vercel"));
+const PORT = process.env.PORT || process.env.PORT_DEFAULT || 5000;
+
+try {
+	app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+} catch (error) {
+	console.error(`Error starting server: ${error}`);
+	process.exit(1);
+}
