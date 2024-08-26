@@ -3,7 +3,7 @@ import express from "express";
 import { supabase as DB } from "../services/conectDB.js";
 
 const router = express.Router();
-
+//app.get("/", (req, res) => res.send("Express on Vercel"));
 router.get("/", async (req, res) => {
 	const { data, error } = await DB.from("TODOS").select("*");
 	if (error) return res.status(500).json({ error: error.message });
