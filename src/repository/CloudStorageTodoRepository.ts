@@ -1,9 +1,9 @@
 import { todo, TodoRepositoryCloud, todos } from "../types/type";
-
+const url = 'https://todo-list-mn4o-og3tobo0r-duquersons-projects.vercel.app/'
 export class CloudStorageRepository implements TodoRepositoryCloud {
     async fetchTodos(): Promise<todos> {
         try {
-            const response = await fetch(`/api`);
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -18,7 +18,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
     async updateSupabase(todos: todos): Promise<void> {
         try {
-            const response = await fetch(`/api`, {
+            const response = await fetch(url, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
     async addSupabase(todo: todo): Promise<void> {
         try {
-            const response = await fetch(`/api`, {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
     async deleteSupabase(id: string): Promise<void> {
         try {
-            const response = await fetch(`/api/${id}`, {
+            const response = await fetch(`${url}${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
     async clearCompletedSupabase(): Promise<void> {
         try {
-            const response = await fetch(`/api`, {
+            const response = await fetch(url, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
