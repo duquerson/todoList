@@ -1,0 +1,25 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Duquerson",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^7.1.0",
+    "path": "^0.12.7",
+    "vercel": "^37.1.2",
+    "zod": "^3.23.8"
+  }
+}
