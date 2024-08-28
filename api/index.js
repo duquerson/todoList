@@ -4,8 +4,8 @@
 import express from "express";
 import helmet from "helmet";
 import api from "./routes/index.js";
-//const whitelist = ["todo-list-git-main-duquersons-projects.vercel.app"];
-/*const corsOptions = {
+const whitelist = ["https://todo-list-flame-one-80.vercel.app/"];
+const corsOptions = {
 	origin: (origin, callback) => {
 		if (whitelist.indexOf(origin) !== -1 || !origin) {
 			callback(null, true);
@@ -14,11 +14,11 @@ import api from "./routes/index.js";
 		}
 	},
 	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-};*/
+};
 
 const app = express();
 app.disable("x-powered-by");
-//app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(express.json());
 app.use("/api", api);

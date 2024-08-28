@@ -1,5 +1,5 @@
 import { todo, TodoRepositoryCloud, todos } from "../types/type";
-const url = 'https://todo-list-mn4o-og3tobo0r-duquersons-projects.vercel.app/'
+const url = 'https://todo-list-mn4o.vercel.app/api/'
 export class CloudStorageRepository implements TodoRepositoryCloud {
     async fetchTodos(): Promise<todos> {
         try {
