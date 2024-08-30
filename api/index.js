@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable indent */
 /* eslint-disable no-undef */
+import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import api from "./routes/index.js";
