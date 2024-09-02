@@ -5,19 +5,23 @@
 		"lib": ["ES2022", "DOM", "DOM.Iterable"],
 		"module": "ESNext",
 		"skipLibCheck": true,
-
+		"sourceMap": true,
+		"esModuleInterop": true,
 		"moduleResolution": "bundler",
 		"allowImportingTsExtensions": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
-
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src", "api/services"],
+	"ts-node": {
+		"esm": true
+	},
+	"include": ["src", "api/**/*.ts", "api/index.js"],
+	"exclude": ["node_modules"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
