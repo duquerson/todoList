@@ -41,6 +41,9 @@ importers:
       helmet:
         specifier: ^7.1.0
         version: 7.1.0
+      http-errors:
+        specifier: ^2.0.0
+        version: 2.0.0
       lucide-react:
         specifier: ^0.379.0
         version: 0.379.0(react@18.3.1)

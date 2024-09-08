@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 import express from "express";
+import { errorHandler } from "./middlewares/error.handler.js";
+import { logErrors } from "./middlewares/logs.handler.js";
 import routerApi from "./routes/index.js";
 
 const PORT = process.env.PORT || process.env.PORT_DEFAULT || 3000;
@@ -10,6 +12,8 @@ app.use(express.json());
 app.get("/API/v1/", (_req, res) => res.send("is RUNNING !!!!!"));
 
 routerApi(app);
+app.use(logErrors);
+app.use(errorHandler);
 
 try {
 	app.listen(PORT, () => console.log(`Server running on ${PORT}`));

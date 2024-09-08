@@ -1,36 +1,34 @@
 import { supabase as DB } from "./conectDB.js";
 
-const getTodos = async () => DB.from("TODOS").select("*");
-const addTodo = async (item) => DB.from("TODOS").insert(item);
-const updateTodos = async (todos) => DB.from("TODOS").upsert(todos);
-const updateTodoById = async (id, updatedTodo) => {
-	return DB.from("TODOS").update(updatedTodo).eq("id", id);
-};
-const deleteTodoById = async (id) => {
-	return DB.from("TODOS").delete().eq("id", id);
-};
-const deleteCompletedTodos = async () => {
-	return DB.from("TODOS").delete().eq("completed", true);
-};
-
 class TodoService {
-	getTodos() {
-		return getTodos();
+	async getTodos() {
+		const { data, error } = await DB.from("TODOS").select("*");
+		return { data, error };
 	}
-	addTodo(item) {
-		return addTodo(item);
+
+	async addTodo(item) {
+		const { data, error } = await DB.from("TODOS").insert(item);
+		return { data, error };
 	}
-	updateTodos(todos) {
-		return updateTodos(todos);
+
+	async updateTodos(todos) {
+		const { error } = await DB.from("TODOS").upsert(todos);
+		return error;
 	}
-	updateTodoById(id, updatedTodo) {
-		return updateTodoById(id, updatedTodo);
+
+	async updateTodoById(id, updatedTodo) {
+		const { error } = await DB.from("TODOS").update(updatedTodo).eq("id", id);
+		return error;
 	}
-	deleteTodoById(id) {
-		return deleteTodoById(id);
+
+	async deleteTodoById(id) {
+		const { error } = await DB.from("TODOS").delete().eq("id", id);
+		return error;
 	}
-	deleteCompletedTodos() {
-		return deleteCompletedTodos();
+
+	async deleteCompletedTodos() {
+		const { error } = await DB.from("TODOS").delete().eq("completed", true);
+		return error;
 	}
 }
 
