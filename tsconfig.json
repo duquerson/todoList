@@ -21,7 +21,7 @@
 	"ts-node": {
 		"esm": true
 	},
-	"include": ["src", "api/**/*.ts", "api/index.js", "api/shemas/todo.shema.js"],
+	"include": ["src", "api/**/*.ts", "api/index.js", "api/schemas/todo.shema.jss"],
 	"exclude": ["node_modules"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

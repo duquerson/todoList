@@ -2,7 +2,7 @@ import createError from "http-errors";
 
 //--> Middleware de validación usando Zod
 export const validate = (schema) => (req, res, _next) => {
-	const validationResult = schema.safeParse(req.query); // Puedes usar req.body o req.params según el caso
+	const validationResult = schema.safeParse(req.body); // Puedes usar req.body o req.params según el caso
 
 	if (!validationResult.success) {
 		//--> Si la validación falla, lanza un error 400 con los detalles de Zod
