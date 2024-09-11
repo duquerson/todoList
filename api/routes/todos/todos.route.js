@@ -4,43 +4,43 @@ import express from "express";
 import { validate } from "../../middlewares/validator.handler.js";
 import { IDschema } from "../../schemas/ID.schema.js";
 import { todoSchema } from "../../schemas/todo.schema.js";
-import { default as TodosService, default as todosService } from "../../services/todos.service.js";
+import TodoService from "../../services/todos.service.js";
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
 	try {
-		const todos = await TodosService.getTodos();
+		const todos = await TodoService.getTodos();
 		res.status(200).json(todos);
 	} catch (error) {
 		next(error);
 	}
 });
 
-router.post("/", validate(todoSchema), async (req, res, next) => {
+router.post("/", validate(todoSchema, "body"), async (req, res, next) => {
 	try {
 		const item = req.body;
-		const todos = await TodosService.addTodo(item);
+		const todos = await TodoService.addTodo(item);
 		res.status(201).json(todos);
 	} catch (error) {
 		next(error);
 	}
 });
 
-router.put("/:id", validate(IDschema), async (req, res, next) => {
+router.put("/:id", validate(IDschema, "params"), async (req, res, next) => {
 	try {
-		const todos = req.body;
-		await todosService.updateTodos(todos);
+		const { id } = req.params;
+		await TodoService.updateTodoById(id);
 		res.status(200).json({ success: true });
 	} catch (error) {
 		next(error);
 	}
 });
 
-router.delete("/:id", validate(IDschema), async (req, res, next) => {
+router.delete("/:id", validate(IDschema, "params"), async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		await todosService.deleteTodoById(id);
-		res.status(200).json({ success: true });
+		await TodoService.deleteTodoById(id);
+		res.status(204).json({ success: true });
 	} catch (err) {
 		next(err);
 	}
@@ -48,9 +48,8 @@ router.delete("/:id", validate(IDschema), async (req, res, next) => {
 
 router.delete("/", async (req, res, next) => {
 	try {
-		await todosService.deleteCompletedTodos();
-		res.json({ success: true });
-		res.status(200).json({ success: true });
+		await TodoService.deleteCompletedTodos();
+		res.status(204).json({ success: true });
 	} catch (error) {
 		next(error);
 	}

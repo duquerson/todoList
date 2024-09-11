@@ -16,7 +16,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 		}
 	}
 
-	async updateSupabase(todos: todos): Promise<void> {//--->arreglar esta funcion separarla en dos para actualizar un todo y otra en varios todos
+	async updateSupabase(todos: todos): Promise<void> {
 		try {
 			const response = await fetch(`${url}`, {
 				method: 'PUT',
@@ -37,6 +37,26 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 		}
 	}
 
+	async updateSupabaseTodo(id:string): Promise<void> {
+		try {
+			const response = await fetch(`${url}${id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+
+			});
+
+			if (!response.ok) {
+				const errorText = await response.text();
+				console.error(`Error updating todo order in middleware: ${response.statusText} - ${errorText}`);
+				throw new Error(response.statusText);
+			}
+		} catch (error) {
+			console.error('Error updating todos:', error);
+			throw error;
+		}
+	}
 	async addSupabase(todo: todo): Promise<void> {
 		try {
 			const response = await fetch(url, {
