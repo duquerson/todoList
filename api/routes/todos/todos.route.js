@@ -4,6 +4,7 @@ import express from "express";
 import { validate } from "../../middlewares/validator.handler.js";
 import { IDschema } from "../../schemas/ID.schema.js";
 import { todoSchema } from "../../schemas/todo.schema.js";
+import { todosSchema } from "../../schemas/todos.schema.js";
 import TodoService from "../../services/todos.service.js";
 const router = express.Router();
 
@@ -26,7 +27,17 @@ router.post("/", validate(todoSchema, "body"), async (req, res, next) => {
 	}
 });
 
-router.put("/", validate(todoSchema, "body"), async (req, res, next) => {
+router.put("/", validate(todosSchema, "body"), async (req, res, next) => {
+	try {
+		const todos = req.body;
+		await TodoService.updateTodos(todos);
+		res.status(200).json({ success: true });
+	} catch (error) {
+		next(error);
+	}
+});
+
+router.put("/update", validate(todoSchema, "body"), async (req, res, next) => {
 	try {
 		const item = req.body;
 		await TodoService.updateTodo(item);

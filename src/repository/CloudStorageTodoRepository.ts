@@ -39,7 +39,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
 	async updateTodo(todo: todo): Promise<void> {
 		try {
-			const response = await fetch(`${url}`, {
+			const response = await fetch(`${url}/update`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
