@@ -1,7 +1,7 @@
 import { todo, TodoRepositoryCloud, todos } from "../types/type";
 const url = 'http://localhost:3000/api/v1/todos/'
 export class CloudStorageRepository implements TodoRepositoryCloud {
-	async fetchTodos(): Promise<todos> {
+	async getTodos(): Promise<todos> {
 		try {
 			const response = await fetch(url);
 			if (!response.ok) {
@@ -16,7 +16,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 		}
 	}
 
-	async updateSupabase(todos: todos): Promise<void> {
+	async updateTodos(todos: todos): Promise<void> {
 		try {
 			const response = await fetch(`${url}`, {
 				method: 'PUT',
@@ -37,14 +37,14 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 		}
 	}
 
-	async updateSupabaseTodo(id:string): Promise<void> {
+	async updateTodo(todo: todo): Promise<void> {
 		try {
-			const response = await fetch(`${url}${id}`, {
+			const response = await fetch(`${url}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-
+				body: JSON.stringify(todo),
 			});
 
 			if (!response.ok) {
@@ -57,7 +57,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 			throw error;
 		}
 	}
-	async addSupabase(todo: todo): Promise<void> {
+	async addTodo(todo: todo): Promise<void> {
 		try {
 			const response = await fetch(url, {
 				method: 'POST',
@@ -78,7 +78,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 		}
 	}
 
-	async deleteSupabase(id: string): Promise<void> {
+	async deleteTodo(id: string): Promise<void> {
 		try {
 			const response = await fetch(`${url}${id}`, {
 				method: 'DELETE',
@@ -98,7 +98,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 		}
 	}
 
-	async clearCompletedSupabase(): Promise<void> {
+	async deleteCompletedTodos(): Promise<void> {
 		try {
 			const response = await fetch(url, {
 				method: 'DELETE',

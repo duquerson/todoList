@@ -9,9 +9,9 @@ import * as actions from "./utils/todoFuntions";
 
 // Hook personalizado
 export const useTodoReducer = (todoRepository : TodoRepositoryCloud) => {
-    const [todos, dispatch] = useReducer(reducer, init_Todos);
+	const [todos, dispatch] = useReducer(reducer, init_Todos);
 
-    /*
+	/*
     React.useEffect(() => {
         dispatch({ type: stateTodo.LOAD });
 
@@ -32,46 +32,46 @@ export const useTodoReducer = (todoRepository : TodoRepositoryCloud) => {
     },[]);*/
 
 
-    React.useEffect(() => {
-        dispatch({ type: stateTodo.LOAD });
-        const loadTodos = async () => {
-            try {
-                const todosFrom = await actions.loadTodos(dispatch, todoRepository);
-                dispatch({ type: stateTodo.LOAD_SUCCESS, payload: todosFrom });
-            } catch (error) {
+	React.useEffect(() => {
+		dispatch({ type: stateTodo.LOAD });
+		const loadTodos = async () => {
+			try {
+				const todosFrom = await actions.loadTodos(dispatch, todoRepository);
+				dispatch({ type: stateTodo.LOAD_SUCCESS, payload: todosFrom });
+			} catch (error) {
 
-                dispatch({ type: stateTodo.LOAD_ERROR });
-                console.error("Error loading todos:", error);
-            }
-        };
+				dispatch({ type: stateTodo.LOAD_ERROR });
+				console.error("Error loading todos:", error);
+			}
+		};
 
-        loadTodos();
-    }, []);
+		loadTodos();
+	}, []);
 
-    //filter todos
-    const filteredTodos = useMemo(() => {
-        return todos.todos.filter(todo => {
-            if (todos.filter === 'active') return !todo.completed;
-            if (todos.filter === 'completed') return todo.completed;
-            return true; // 'all' case
-        });
-    }, [todos.todos, todos.filter]);
-    return {
-        todos: filteredTodos,
-        load: todos.load,
-        error: todos.error,
-        filter: todos.filter,
-        totalItems: todos.totalItems,
-        actions: {
-            agregarTodo: (description: string) => actions.agregarTodo( description, todoRepository, dispatch),
-            eliminarTodo: (id: string) => actions.eliminarTodo(id, todoRepository, dispatch),
-            completarTodo:(id: string) => actions.completarTodo(id, todoRepository, dispatch, todos.todos),
-            clearComplete: () => actions.clearComplete(todoRepository, dispatch),
-            todosFilter: (filter: FilterValue) => actions.setFilter(filter, dispatch),
-            handleDragEnd: (event: DragEndEvent) => actions.handleDragEnd(event, todoRepository, dispatch, todos.todos),
-            cargarTodos: () => actions.cargarTodos(dispatch),
-            cargarTodosSuccess: (payload: todos )=> actions.cargarTodosSuccess(payload, dispatch),
-            cargarTodosError: () => actions.cargarTodosError(dispatch),
-        }
-    };
+	//filter todos
+	const filteredTodos = useMemo(() => {
+		return todos.todos.filter(todo => {
+			if (todos.filter === 'active') return !todo.completed;
+			if (todos.filter === 'completed') return todo.completed;
+			return true; // 'all' case
+		});
+	}, [todos.todos, todos.filter]);
+	return {
+		todos: filteredTodos,
+		load: todos.load,
+		error: todos.error,
+		filter: todos.filter,
+		totalItems: todos.totalItems,
+		actions: {
+			agregarTodo: (description: string) => actions.agregarTodo( description, todoRepository, dispatch),
+			eliminarTodo: (id: string) => actions.eliminarTodo(id, todoRepository, dispatch),
+			completarTodo:(id: string) => actions.completarTodo(id, todoRepository, dispatch, todos.todos),
+			clearComplete: () => actions.clearComplete(todoRepository, dispatch),
+			todosFilter: (filter: FilterValue) => actions.setFilter(filter, dispatch),
+			handleDragEnd: (event: DragEndEvent) => actions.handleDragEnd(event, todoRepository, dispatch, todos.todos),
+			cargarTodos: () => actions.cargarTodos(dispatch),
+			cargarTodosSuccess: (payload: todos )=> actions.cargarTodosSuccess(payload, dispatch),
+			cargarTodosError: () => actions.cargarTodosError(dispatch),
+		}
+	};
 };

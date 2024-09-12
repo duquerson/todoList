@@ -26,10 +26,10 @@ router.post("/", validate(todoSchema, "body"), async (req, res, next) => {
 	}
 });
 
-router.put("/:id", validate(IDschema, "params"), async (req, res, next) => {
+router.put("/", validate(todoSchema, "body"), async (req, res, next) => {
 	try {
-		const { id } = req.params;
-		await TodoService.updateTodoById(id);
+		const item = req.body;
+		await TodoService.updateTodo(item);
 		res.status(200).json({ success: true });
 	} catch (error) {
 		next(error);

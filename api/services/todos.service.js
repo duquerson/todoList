@@ -18,11 +18,8 @@ class TodoService {
 		if (error) throw createError(500, "Error update todos", { cause: error });
 	}
 
-	async updateTodoById(id) {
-		const { data } = await DB.from("todos").select("completed").eq("id", id).single();
-		console.log(data.completed);
-		const { error } = await DB.from("TODOS").update({ completed: !data?.completed }).eq("id", id);
-		console.log(!data.completed);
+	async updateTodo(todo) {
+		const { error } = await DB.from("TODOS").update({ completed: !todo.completed }).eq("id", todo.id);
 		if (error) {
 			throw createError(500, "Error update todo ", { cause: error });
 		}

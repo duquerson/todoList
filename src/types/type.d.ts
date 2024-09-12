@@ -76,11 +76,12 @@ export interface typefilterHandlers{
 export type FilterValue = typeof filter[keyof typeof filter]
 
 export interface TodoRepositoryCloud {
-	fetchTodos(): Promise<todos>;
-	updateSupabase(todos: todos): Promise<void>;
-	addSupabase(todo: todo): Promise<void>;
-	deleteSupabase(id: string): Promise<void>;
-	clearCompletedSupabase(): Promise<void>;
+	getTodos(): Promise<todos>;
+	updateTodos(todos: todos): Promise<void>;
+	addTodo(todo: todo): Promise<void>;
+	updateTodo(todo: todo): Promise<void>;
+	deleteTodo(id: string): Promise<void>;
+	deleteCompletedTodos(): Promise<void>;
 }
 
 
