@@ -1,5 +1,5 @@
 import { todo, TodoRepositoryCloud, todos } from "../types/type";
-const url = 'http://localhost:3000/todos'
+const url = '/todos'
 export class CloudStorageRepository implements TodoRepositoryCloud {
 	async getTodos(): Promise<todos> {
 		try {
