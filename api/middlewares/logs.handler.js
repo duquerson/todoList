@@ -1,6 +1,8 @@
 export const logErrors = (err, req, res, next) => {
-	console.log(`Log errors at ${new Date().toISOString()}: ${err.message}`);
+	if (process.env.NODE_ENV === "development") {
+		console.log(`Error at ${new Date().toISOString()}: ${err.message}`);
+		console.error(err);
+	}
 
-	console.error(err);
 	next(err);
 };

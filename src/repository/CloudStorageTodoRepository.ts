@@ -1,5 +1,5 @@
 import { todo, TodoRepositoryCloud, todos } from "../types/type";
-const url = 'http://localhost:3000/api/v1/todos/'
+const url = 'http://localhost:3000/todos'
 export class CloudStorageRepository implements TodoRepositoryCloud {
 	async getTodos(): Promise<todos> {
 		try {
@@ -37,9 +37,9 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 		}
 	}
 
-	async updateTodo(todo: todo): Promise<void> {
+	async completeTodo(todo: todo): Promise<void> {
 		try {
-			const response = await fetch(`${url}/update`, {
+			const response = await fetch(`${url}/completed`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
 	async deleteTodo(id: string): Promise<void> {
 		try {
-			const response = await fetch(`${url}${id}`, {
+			const response = await fetch(`${url}/${id}`, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json',

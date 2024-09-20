@@ -27,7 +27,7 @@ export const completarTodo = async (id: string, todoRepository: TodoRepositoryCl
 	const todo = todos.find(todo => todo.id === id );
 	if (!todo) return console.error("Todo not found");
 	dispatch({ type: stateTodo.COMPLETE, payload: id });
-	await todoRepository.updateTodo(todo);
+	await todoRepository.completeTodo(todo);
 };
 
 

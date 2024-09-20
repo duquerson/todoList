@@ -79,7 +79,7 @@ export interface TodoRepositoryCloud {
 	getTodos(): Promise<todos>;
 	updateTodos(todos: todos): Promise<void>;
 	addTodo(todo: todo): Promise<void>;
-	updateTodo(todo: todo): Promise<void>;
+	completeTodo(todo: todo): Promise<void>;
 	deleteTodo(id: string): Promise<void>;
 	deleteCompletedTodos(): Promise<void>;
 }
