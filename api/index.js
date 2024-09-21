@@ -9,7 +9,7 @@ import todosRoute from "./routes/todosRoute.js";
 //declarations
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-//const PORT = process.env.PORT || process.env.PORT_DEFAULT || 3000;
+const PORT = process.env.PORT || process.env.PORT_DEFAULT || 3000;
 const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000,
 	max: 100,
@@ -83,5 +83,4 @@ app.use((req, res, _next) => {
 		url: req.originalUrl,
 	});
 });
-// app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
-export default app;
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
