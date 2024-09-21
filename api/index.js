@@ -48,6 +48,7 @@ app.use(
 		noSniff: true,
 	})
 );
+app.set("trust proxy", true);
 app.use(limiter);
 app.use(express.json({ limit: "10kb" }));
 app.use((req, res, next) => {
