@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000,
 	max: 100,
+	keyGenerator: (req) => req.ip,
 	message: "Too many requests, please try again later.",
 });
 const data = {
@@ -48,7 +49,7 @@ app.use(
 		noSniff: true,
 	})
 );
-app.set("trust proxy", true);
+//app.set("trust proxy", true);
 app.use(limiter);
 app.use(express.json({ limit: "10kb" }));
 app.use((req, res, next) => {
