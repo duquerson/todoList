@@ -1,4 +1,4 @@
-import TodoService from "../services/todos.service.js";
+import TodoService from "../server/services/TodoService.js";
 export.handler = async ()=>{
 	const TODOS = TodoService.getTodos();
 	return {
