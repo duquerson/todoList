@@ -1,8 +1,8 @@
 import TodoService from "../../server/services/TodoService.js";
-export.handler = async ()=>{
+export const handler = async () => {
 	const TODOS = await TodoService.getTodos();
 	return {
 		statusCode: 200,
-		body: JSON.stringify(TODOS)
-	}
-}
+		body: JSON.stringify(TODOS),
+	};
+};
