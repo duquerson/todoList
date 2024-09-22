@@ -65,6 +65,9 @@ dependencies:
   tailwindcss-animate:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.12)
+  todoList:
+    specifier: 'link:'
+    version: 'link:'
   vercel:
     specifier: ^37.5.3
     version: 37.5.3
