@@ -4,12 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-		"dev": "vite",
-		"build": "tsc && vite build",
-		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-		"preview": "vite preview",
+
 		"dev:backend": "node --watch api/index.js",
-		"start": "pnpm run build && node api/index.js"
+		"start": "node api/index.js"
 	},
 	"dependencies": {
 
