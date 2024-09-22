@@ -61,7 +61,7 @@ app.use((req, res, next) => {
 app.use("/node_modules", (req, res, _next) => {
 	res.status(403).send({ message: "Access Denied" });
 });
-app.use(
+/*app.use(
 	"/",
 	express.static(path.resolve(__dirname, "../dist"), {
 		setHeaders: (res, path) => {
@@ -71,7 +71,7 @@ app.use(
 		},
 		extensions: ["html", "css", "js"],
 	})
-);
+);*/
 //routerApi(app);
 app.use("/todos", todosRoute);
 app.use(logErrors);
