@@ -25,6 +25,7 @@
 		"helmet": "^7.1.0",
 		"http-errors": "^2.0.0",
 		"lucide-react": "^0.379.0",
+		"node-fetch": "^3.3.2",
 		"path": "^0.12.7",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
