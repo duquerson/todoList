@@ -5,7 +5,7 @@ const url = '/todos'
 export class CloudStorageRepository implements TodoRepositoryCloud {
 	async getTodos(): Promise<todos> {
 		try {
-			const response = await fetch("./api/getTodos");
+			const response = await fetch("/.netlify/functions/getTodos");
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			}
