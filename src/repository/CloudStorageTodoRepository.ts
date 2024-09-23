@@ -1,11 +1,12 @@
 import { todo, TodoRepositoryCloud, todos } from "../types/type";
 //const url = 'http://localhost:3000/todos'
 //const url= 'todo-list-flame-one-80.vercel.app/todos'
-const url = '/todos'
+const url = '/.api/todos/get_Todos'
 export class CloudStorageRepository implements TodoRepositoryCloud {
 	async getTodos(): Promise<todos> {
 		try {
-			const response = await fetch("/.netlify/functions/getTodos");
+			//const response = await fetch("/.netlify/functions/getTodos");
+			const response = await fetch(url);
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			}
