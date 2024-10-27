@@ -61,7 +61,7 @@ export const useTodoReducer = (todoRepository : TodoRepositoryCloud) => {
 		load: todos.load,
 		error: todos.error,
 		filter: todos.filter,
-		totalItems: todos.totalItems,
+		totalItems: filteredTodos.length,//todos.totalItems,
 		actions: {
 			agregarTodo: (description: string) => actions.agregarTodo( description, todoRepository, dispatch),
 			eliminarTodo: (id: string) => actions.eliminarTodo(id, todoRepository, dispatch),

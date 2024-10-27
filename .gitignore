@@ -193,3 +193,6 @@ SquareX Safe File Viewer
 /src/secret.ts
 
 .vercel
+
+# Local Netlify folder
+.netlify

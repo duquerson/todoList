@@ -1,16 +1,13 @@
 import { todo, TodoRepositoryCloud, todos } from "../types/type";
-//const url = 'http://localhost:3000/todos'
-//const url= 'todo-list-flame-one-80.vercel.app/todos'
-const url = '/.netlify/functions/getTodos'
+
+const url = '/.netlify/functions/setTodos'
 export class CloudStorageRepository implements TodoRepositoryCloud {
 	async getTodos(): Promise<todos> {
 		try {
-			//const response = await fetch("/.netlify/functions/getTodos");
-			const response = await fetch(url);
+			const response = await fetch(`${url}/getTodos`);
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			}
-
 			const todos = await response.json();
 			return todos;
 		} catch (error) {
@@ -21,7 +18,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
 	async updateTodos(todos: todos): Promise<void> {
 		try {
-			const response = await fetch(`${url}`, {
+			const response = await fetch(`${url}/updateTodos`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
@@ -42,7 +39,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
 	async completeTodo(todo: todo): Promise<void> {
 		try {
-			const response = await fetch(`${url}/completed`, {
+			const response = await fetch(`${url}/updateTodo`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
@@ -62,7 +59,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 	}
 	async addTodo(todo: todo): Promise<void> {
 		try {
-			const response = await fetch(url, {
+			const response = await fetch(`${url}/addTodo`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -83,11 +80,12 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
 	async deleteTodo(id: string): Promise<void> {
 		try {
-			const response = await fetch(`${url}/${id}`, {
+			const response = await fetch(`${url}/deleteTodoById`, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json',
 				},
+				body: JSON.stringify({ id })
 			});
 
 			if (!response.ok) {
@@ -103,7 +101,7 @@ export class CloudStorageRepository implements TodoRepositoryCloud {
 
 	async deleteCompletedTodos(): Promise<void> {
 		try {
-			const response = await fetch(url, {
+			const response = await fetch(`${url}/deleteCompletedTodos`, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json',

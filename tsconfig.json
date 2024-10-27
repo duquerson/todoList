@@ -21,7 +21,7 @@
 	"ts-node": {
 		"esm": true
 	},
-	"include": ["src", "api/**/*.ts", "api/index.js", "api/schemas/todo.shema.jss"],
+	"include": ["src", "netlify/**/*.ts", "netlify/index.js", "netlify/schemas/todo.schema.js"],
 	"exclude": ["node_modules"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
