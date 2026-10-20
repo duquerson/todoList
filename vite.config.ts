@@ -7,12 +7,7 @@ export default defineConfig({
     plugins: [react()],
     test: {
         globals: true,
-        environment: 'jsdom',
-        setupFiles: './src/setupTest.ts',
+        environment: 'node',
+        include: ['src/**/*.test.{ts,tsx}'],
     },
-    //server:{
-    //    proxy:{
-    //        '/api': 'http://localhost:1234',
-    //    }
-    //}
 })
