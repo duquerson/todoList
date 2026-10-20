@@ -16,12 +16,18 @@
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+		"baseUrl": ".",
+		"paths": {
+			"@app/*": ["src/app/*"],
+			"@pages/*": ["src/pages/*"],
+			"@widgets/*": ["src/widgets/*"],
+			"@features/*": ["src/features/*"],
+			"@entities/*": ["src/entities/*"],
+			"@shared/*": ["src/shared/*"]
+		}
 	},
-	"ts-node": {
-		"esm": true
-	},
-	"include": ["src", "netlify/**/*.ts", "netlify/index.js", "netlify/schemas/todo.schema.js"],
-	"exclude": ["node_modules"],
+	"include": ["src"],
+	"exclude": ["node_modules", "dist"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
